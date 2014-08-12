@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.6)
 
-set(PROJ_NAME CImgShowImage)
+set(PROJ_NAME CImgHelloWorld)
 PROJECT(${PROJ_NAME})
 
 # Prevent compilation in-source

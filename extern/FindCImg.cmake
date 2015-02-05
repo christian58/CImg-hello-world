@@ -67,6 +67,10 @@ SET(CIMG_MAGICK_CCFLAGS -Dcimg_use_magick)
 # ( http://www.fftw.org/ )
 SET(CIMG_FFTW3_CCFLAGS  -Dcimg_use_fftw3)
 
+# Flags to enable zlib.
+# ( http://www.zlib.net/ )
+SET(CIMG_ZLIB_CCFLAGS  -Dcimg_use_zlib)
+
 # ### Search Additional Libraries ##########
 FIND_PACKAGE(OpenCV)
 FIND_PACKAGE(JPEG)
@@ -92,7 +96,6 @@ endif()
 
 # #### End of additional libraries search ##########
 
-
 ### Configure Paths according to detected packages
 if(TIFF_FOUND)
   get_filename_component(TIFF_LIB_DIRS ${TIFF_LIBRARIES} PATH)
@@ -111,8 +114,6 @@ if(TIFF_FOUND)
   )
 endif()
 
-
-
 if(JPEG_FOUND)
   get_filename_component(JPEG_LIB_DIRS ${JPEG_LIBRARIES} PATH)
   SET(CIMG_CFLAGS "${CIMG_CFLAGS} ${CIMG_JPEG_CCFLAGS}")
@@ -129,9 +130,6 @@ if(JPEG_FOUND)
     ${JPEG_LIBRARIES}
   )
 endif()
-
-
-
 
 if (ZLIB_FOUND)
   SET(CIMG_CFLAGS "${CIMG_CFLAGS} ${CIMG_ZLIB_CCFLAGS}")
@@ -165,9 +163,6 @@ if (ZLIB_FOUND)
   endif()
 endif()
 
-
-
-
 if(FFTW3_FOUND)
   SET(CIMG_CFLAGS "${CIMG_CFLAGS} ${CIMG_FFTW3_CCFLAGS}")
   #link_directories( ${FFTW3_LIBRARY_DIRS} )
@@ -183,9 +178,6 @@ if(FFTW3_FOUND)
     ${FFTW3_LIBRARIES}
   )
 endif()
-
-
-
 
 if(OPENEXR_FOUND)
   SET(CIMG_CFLAGS "${CIMG_CFLAGS} ${CIMG_OPENEXR_CCFLAGS}")
@@ -203,7 +195,6 @@ if(OPENEXR_FOUND)
   )
 endif()
 
-
 if(MAGICK_FOUND)
   SET(CIMG_CFLAGS "${CIMG_CFLAGS} ${CIMG_MAGICK_CCFLAGS}")
   #link_directories( ${MAGICK_LIBRARY_DIRS} )
@@ -219,9 +210,6 @@ if(MAGICK_FOUND)
     ${MAGICK_LIBRARIES}
   )
 endif()
-
-
-
 
 if( LIBAVCODEC_FOUND  AND LIBAVFORMAT_FOUND AND LIBSWSCALE_FOUND AND LIBAVUTIL_FOUND )
   SET(CIMG_CFLAGS "${CIMG_CFLAGS} ${CIMG_FFMPEG_CCFLAGS}")
@@ -256,7 +244,6 @@ if( LIBAVCODEC_FOUND  AND LIBAVFORMAT_FOUND AND LIBSWSCALE_FOUND AND LIBAVUTIL_F
     ${LIBAVUTIL_LIBRARIES}
   )
 endif()
-
 
 if(NOT APPLE)
   if(NOT WIN32)
@@ -313,8 +300,6 @@ if (OpenCV_FOUND)
   )
 endif()
 
-
-
 if(LAPACK_FOUND)
   SET(CIMG_CFLAGS "${CIMG_CFLAGS} ${CIMG_LAPACK_CCFLAGS}")
   #link_directories( ${LAPACK_LIBRARY_DIRS} )
@@ -347,15 +332,10 @@ if(BLAS_FOUND)
   )
 endif()
 
-
 # Add CIMG Flags to Compilation Flags
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CIMG_CFLAGS}")
-
-
 
 foreach(program ${CIMG_FILES})
   add_executable(${program} ${program}.cpp)
   target_link_libraries(${program} ${CImg_SYSTEM_LIBS} )
 endforeach(program)
-
-
